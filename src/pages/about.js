@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import Head from "next/head";
 import Image from "next/image";
-import profab from "../../public/images/profile/ProfileCard.png";
+import profab from "../../public/images/profile/profilecard.png";
 import bgImage from "../../public/images/background.jpg";
 import { useInView, useMotionValue, useSpring, motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";

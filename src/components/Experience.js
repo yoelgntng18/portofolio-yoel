@@ -89,7 +89,7 @@ const Experience = () => {
             time="Des 2025 – Now 2026"
             address="Jakarta, East Java"
             work="Developing and maintaining websites"
-            logo="/images/logo-Maritim.jpg"
+            logo="/images/logo-maritim.jpg"
           />
           <Details
             company="SDA Media"
@@ -97,7 +97,7 @@ const Experience = () => {
             time="2024 - 2024"
             address="Bandung, East Java"
             work="Developing and maintaining websites using Laravel and MySQL. Collaborating in project planning, code reviews, and sprint planning. Active in technical requirements meetings and using GitLab for version control. Contributing to application testing with focus on bug identification and performance improvements."
-            logo="/images/logo-Sda.jpg"
+            logo="/images/logo-sda.jpg"
           />
           <Details
             company="Bangkit Academy"
@@ -105,7 +105,7 @@ const Experience = () => {
             time="Feb 2024 – July 2024"
             address="Indonesia"
             work="Led by Google, Tokopedia, Gojek, & Traveloka. Intensive program focused on cloud computing technologies and best practices."
-            logo="/images/logo-Bangkit.jpg"
+            logo="/images/logo-bangkit.jpg"
           />
           <Details
             company="Universitas Advent Indonesia"
@@ -113,7 +113,7 @@ const Experience = () => {
             time="2021 - 2023"
             address="Bandung, East Java"
             work="Monitored and maintained orderliness of students living in the men's dormitory, ensuring a conducive living environment."
-            logo="/images/Logo-Unai.png"
+            logo="/images/logo-unai.png"
           />
         </ul>
       </div>
