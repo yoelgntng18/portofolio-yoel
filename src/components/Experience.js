@@ -2,27 +2,60 @@ import React, { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import LiIcon from "./LiIcon";
 import Link from "next/link";
+import Image from "next/image";
 
-const Details = ({ position, time, address, work }) => {
+const Details = ({ company, position, time, address, work, logo }) => {
   const ref = useRef(null);
   return (
     <li
       ref={ref}
-      className="my-8 first:mt-0 last:mb-0 w-[60%] mx-auto flex flex-col items-start justify-between md:w-[80%]"
+      className="my-8 first:mt-0 last:mb-0 w-[60%] mx-auto flex flex-col items-start justify-between md:w-[90%] sm:w-[95%]"
     >
       <LiIcon reference={ref} />
       <motion.div
-        initial={{ y: 50 }}
-        whileInView={{ y: 0 }}
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, type: "spring" }}
+        className="w-full"
       >
-        <h3 className="capitalize font-bold text-2xl sm:text-xl xs:text-lg">
-          {position}{" "}
-        </h3>
-        <span className="capitalize text-dark/75 font-medium dark:text-light/50 xs:text-sm">
-          {time} | {address}
-        </span>
-        <p className="font-medium w-full md:text-sm"> {work}</p>
+        <div className="bg-gradient-to-br from-dark/80 to-dark/40 border border-light/20 rounded-xl p-6 sm:p-4 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300 shadow-lg hover:shadow-purple-500/20">
+          <div className="flex items-start gap-6 md:gap-4 sm:gap-3 sm:flex-col">
+            {logo && (
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 md:w-14 md:h-14 sm:w-12 sm:h-12 rounded-xl bg-light/10 p-3 sm:p-2 flex items-center justify-center border border-light/10">
+                  <Image
+                    src={logo}
+                    alt={company}
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            )}
+            <div className="flex-1 min-w-0 sm:w-full">
+              <h3 className="font-bold text-xl sm:text-lg xs:text-base text-light mb-1">
+                {company}
+              </h3>
+              <p className="text-purple-400 font-semibold text-base sm:text-sm xs:text-xs mb-3">
+                {position}
+              </p>
+              <div className="flex flex-wrap gap-3 sm:gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 text-light/60 text-sm xs:text-xs bg-light/5 px-3 py-1 sm:px-2 sm:py-0.5 rounded-full">
+                  <span>📅</span> {time}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-light/60 text-sm xs:text-xs bg-light/5 px-3 py-1 sm:px-2 sm:py-0.5 rounded-full">
+                  <span>📍</span> {address}
+                </span>
+              </div>
+              {work && (
+                <p className="text-sm md:text-xs sm:text-xs text-light/70 leading-relaxed">
+                  {work}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
       </motion.div>
     </li>
   );
@@ -37,47 +70,60 @@ const Experience = () => {
   });
 
   return (
-    <div className="my-64">
-      <h2 className="font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16">
+    <div className="my-2">
+      <h2 className="font-bold text-4xl mb-16 w-full text-center md:text-6xl xs:text-4xl md:mb-8 sm:!text-2xl xs:!text-2xl">
         Experience
       </h2>
 
-      <div ref={ref} className="relative w-[75%] mx-auto lg:w-[90%] md:w-full">
+      <div ref={ref} className="relative w-[75%] mx-auto lg:w-[90%] md:w-full sm:px-4">
         <motion.div
           className="absolute left-9 top-0 w-[4px] md:w-[2px] md:left-[30px] xs:left-[20px] h-full bg-primaryDark shadow-3xl 
-            origin-top  dark:bg-primaryDark dark:shadow-3xl"
+            origin-top"
           style={{ scaleY: scrollYProgress }}
         />
 
         <ul className="w-full flex flex-col items-start justify-between ml-4 xs:ml-2">
           <Details
-            position="Fullstack Developer | SDA Media"
-            time="2024 - 2025"
-            address="Bandung East Java"
-            work="I have experience developing and maintaining websites using Laravel, as well as managing databases with MySQL. Accustomed to working collaboratively in project planning, code reviews, and sprint planning, I am also active in technical requirements meetings with the development team or tech lead. During the development process, I use GitLab for version control and participate in sprint reviews. In addition, I play a role in application testing, including the main project and Lagu Sion Plus V2, with a focus on bug identification and performance improvements, as well as providing constructive feedback to improve reliability and user satisfaction."
+            company="Maritim Muda Nusantara"
+            position="Web Developer"
+            time="Des 2025 – Now 2026"
+            address="Jakarta, East Java"
+            work="Developing and maintaining websites"
+            logo="/images/logo-Maritim.jpg"
           />
-
           <Details
-            position="Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka | Cloud Engineer Cohort Bangkit Academy"
+            company="SDA Media"
+            position="Fullstack Developer"
+            time="2024 - 2024"
+            address="Bandung, East Java"
+            work="Developing and maintaining websites using Laravel and MySQL. Collaborating in project planning, code reviews, and sprint planning. Active in technical requirements meetings and using GitLab for version control. Contributing to application testing with focus on bug identification and performance improvements."
+            logo="/images/logo-Sda.jpg"
+          />
+          <Details
+            company="Bangkit Academy"
+            position="Cloud Engineer Cohort"
             time="Feb 2024 – July 2024"
             address="Indonesia"
+            work="Led by Google, Tokopedia, Gojek, & Traveloka. Intensive program focused on cloud computing technologies and best practices."
+            logo="/images/logo-Bangkit.jpg"
           />
           <Details
-            position="Monitor at the men's dormitory | Universitas Advent Indonesia"
+            company="Universitas Advent Indonesia"
+            position="Dormitory Monitor"
             time="2021 - 2023"
-            address="Bandung East Java"
-            work="•	I was once a monitor in the men's dormitory at Advent Indonesia University, where the monitor's job was to monitor the orderliness of every student living in the dormitory."
+            address="Bandung, East Java"
+            work="Monitored and maintained orderliness of students living in the men's dormitory, ensuring a conducive living environment."
+            logo="/images/Logo-Unai.png"
           />
         </ul>
       </div>
-      <div className="mt-40 flex items-center justify-between gap-3 grid-cols-2">
+      <div className="mt-40 sm:mt-20 flex items-center justify-between gap-3">
         <Link
           href="/projects/"
           target={"_self"}
-          className={`flex items-center rounded-lg border-2 border-solid bg-light p-2.5 px-6 text-lg font-semibold
-            capitalize text-dark hover:border-light hover:bg-dark hover:text-light 
-            dark:bg-dark dark:text-light dark:hover:bg-light dark:hover:text-dark
-            md:p-2 md:px-4 md:text-base
+          className={`flex items-center rounded-lg border-2 border-solid bg-dark p-2.5 px-6 text-lg font-semibold
+            capitalize text-light hover:border-light hover:bg-light hover:text-dark 
+            md:p-2 md:px-4 md:text-base sm:text-sm sm:px-3 sm:py-2
              `}
         >
           View Projects

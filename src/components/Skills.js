@@ -1,60 +1,71 @@
 import { motion } from "framer-motion";
-import React, { useRef } from "react";
-
-const Skill = ({ name, x, y }) => {
-  const ref = useRef(null);
-  return (
-    <motion.div
-      ref={ref}
-      whileHover={{ scale: 1.05 }}
-      initial={{ x: 0, y: 0 }}
-      whileInView={{ x: x, y: y, transition: { duration: 1.5 } }}
-      viewport={{ once: true }}
-      className="cursor-default w-max origin-center absolute 
-       font-semibold bg-dark text-light py-3 px-6 rounded-full dark:bg-light dark:text-dark
-       lg:py-2 lg:px-4 md:text-sm md:py-1.5 md:px-3  xs:bg-transparent xs:dark:bg-transparent xs:text-dark xs:dark:text-light xs:font-bold
-       "
-    >
-      {name}
-    </motion.div>
-  );
-};
+import React, { useState } from "react";
+import Image from "next/image";
 
 const Skills = () => {
-  const ref = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const skills = [
+    { name: "HTML", logo: "html.png" },
+    { name: "CSS", logo: "css.png" },
+    { name: "JavaScript", logo: "javascript.png" },
+    { name: "Vue.js", logo: "vuejs.png" },
+    { name: "PHP", logo: "php.png" },
+    { name: "React.js", logo: "reactjs.png" },
+    { name: "Next.js", logo: "nextjs.png" },
+    { name: "Laravel", logo: "laravel.png" },
+    { name: "Bootstrap", logo: "bootstrap.png" },
+    { name: "Tailwind", logo: "tailwind.png" },
+    { name: "Dbeaver", logo: "dbeaver.png" },
+    { name: "Git", logo: "git.png" },
+    { name: "Figma", logo: "figma.png" },
+    { name: "VsCode", logo: "vscode.png" }
+  ];
+
   return (
     <>
-      <h2 className="font-bold text-8xl mt-64 w-full text-center md:text-6xl md:mt-32">
+      <h2
+        className="font-bold text-4xl mt-32 w-full text-center md:text-6xl md:mt-16 bg-gradient-to-r from-purple-400 via-purple-800 to-purple-700 bg-clip-text text-transparent sm:!text-2xl xs:!text-2xl"
+        style={{
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
         Skills
       </h2>
       <div
-        ref={ref}
-        className="w-full h-[100vh] relative bg-circularLight dark:bg-circularDark  flex items-center justify-center 
-      mb-64 md:mb-32 rounded-full
-      lg:bg-circularLightLg lg:dark:bg-circularDarkLg md:bg-circularLightMd md:dark:bg-circularDarkMd 
-      sm:bg-circularLightSm sm:dark:bg-circularDarkSm lg:h-[80vh] sm:h-[60vh] xs:h-[50vh] 
-      "
+        className="w-full overflow-hidden py-12 mb-16 relative"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="cursor-default flex rounded-full font-semibold bg-dark text-light px-6 py-7 shadow-dark
-        dark:bg-light dark:text-dark lg:p-6 md:p-4 xs:text-xs xs:p-2
-        "
+          animate={{ x: isPaused ? undefined : ["0%", "-50%"] }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "loop",
+          }}
+          className="flex gap-6 whitespace-nowrap"
         >
-          Web
+          {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-3 font-semibold text-light py-3 px-6 rounded-full  text-lg"
+            >
+              <Image
+                src={`/images/logo-skill/${skill.logo}`}
+                alt={skill.name}
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain"
+              />
+              {skill.name}
+            </div>
+          ))}
         </motion.div>
-
-        <Skill name="HTML" x="-20vw" y="2vw" />
-        <Skill name="CSS" x="-5vw" y="-10vw" />
-        <Skill name="JavaScript" x="20vw" y="6vw" />
-        <Skill name="Vue.js" x="0vw" y="12vw" />
-        <Skill name="PHP" x="-20vw" y="-15vw" />
-        <Skill name="Laravel" x="15vw" y="-12vw" />
-        <Skill name="Bootstrap" x="-35vw" y="-5vw" />
-        <Skill name="Tailwind CSS" x="32vw" y="-5vw" />
-        <Skill name="Mysql" x="0vw" y="-20vw" />
-        <Skill name="Git" x="-25vw" y="18vw" />
-        <Skill name="UI / UX" x="28vw" y="18vw" />
       </div>
     </>
   );
